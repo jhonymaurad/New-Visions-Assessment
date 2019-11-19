@@ -224,6 +224,10 @@ const students = [
 // a) groupByGrade() ​ - should take in an array of student objects as a parameter,
 // and return these records grouped by the ​grade
 
+// The way I approched the problem was: First I analized the data, then I figure out what I needed to resolved the problem
+// I used a switch statement to store each student by its grade
+// I returned an array containing inner arrays, each nested array contains only students with the same grade
+
 const groupByGrade = students => {
   let studentsByGrade = [];
   let six = [];
@@ -271,6 +275,11 @@ function average(student) {
 
 // findLowestAverages() ​ - should take in an array of student objects as a parameter,
 // and return the student with the lowest score average ​for each grade​.
+
+// For this problem I created a helper function to calculate the average of each student.
+// Then I iterated over my two dimensional array, selecting an average value and changing it
+// if the average of the next student was lower than the previous one.
+// Then I pushed each student ith its new property 'average' from each grade into my return array.
 
 const findLowestAverages = students => {
   const lowestInEachGrade = []; //will contain 3 student object, one for each grade
