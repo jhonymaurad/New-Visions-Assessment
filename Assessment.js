@@ -220,7 +220,83 @@ const students = [
     ]
   }
 ];
+//=============================================================================================================
+// a) groupByGrade() ​ - should take in an array of student objects as a parameter,
+// and return these records grouped by the ​grade
 
-const groupByGrade = () => {
-  console.log(students);
+const groupByGrade = students => {
+  let studentsByGrade = [];
+  let six = [];
+  let seven = [];
+  let eigth = [];
+
+  for (let student of students) {
+    switch (student.grade) {
+      case 6:
+        six.push(student);
+        break;
+      case 7:
+        seven.push(student);
+        break;
+      case 8:
+        eigth.push(student);
+
+      default:
+        console.log('student needs a grade');
+    }
+  }
+  studentsByGrade.push(six);
+  studentsByGrade.push(seven);
+  studentsByGrade.push(eigth);
+  return studentsByGrade;
 };
+
+const studentsByGrade = groupByGrade(students);
+
+console.log(studentsByGrade);
+
+// =============================================================================================================
+
+// Helper function that takes a student object and return the average
+// using the value of each score in each subject
+function average(student) {
+  let scores = student.scores;
+  let sum = 0;
+
+  for (let subject of scores) {
+    sum += subject.value;
+  }
+  return sum / scores.length;
+}
+
+// findLowestAverages() ​ - should take in an array of student objects as a parameter,
+// and return the student with the lowest score average ​for each grade​.
+
+const findLowestAverages = students => {
+  const lowestInEachGrade = []; //will contain 3 student object, one for each grade
+
+  for (let i = 0; i < students.length; i++) {
+    let avg = 0;
+    let lowestStudent = {};
+
+    for (let j = 0; j < students[i].length; j++) {
+      if (avg == 0) {
+        lowestStudent = students[i][j];
+        lowestStudent['average'] = average(lowestStudent);
+        avg = lowestStudent.average;
+      }
+      if (average(students[i][j]) < avg) {
+        lowestStudent = students[i][j];
+        lowestStudent['average'] = average(lowestStudent);
+        avg = lowestStudent.average;
+      }
+    }
+    lowestInEachGrade.push(lowestStudent);
+    avg = 0;
+    lowestStudent = {};
+  }
+
+  return lowestInEachGrade;
+};
+
+console.log(findLowestAverages(studentsByGrade));
